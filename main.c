@@ -1,4 +1,3 @@
-#define __AVR_ATmega328PB__ 
 #include <avr/io.h>
 #include "pins.h"
 #include <stdint.h>
@@ -25,12 +24,12 @@ int main(void) {
     DDRx(DISP_DIGIT_2_PORT) |= DISP_DIGIT_2_PIN;
     DDRx(DISP_DIGIT_3_PORT) |= DISP_DIGIT_3_PIN;
 
-    // set all digit selects to high except one
+    // set desired digit select to high
     WRITE_PIN(DISP_DIGIT_1_PORT, DISP_DIGIT_1_PIN, 0);
     WRITE_PIN(DISP_DIGIT_2_PORT, DISP_DIGIT_2_PIN, 1);
-    WRITE_PIN(DISP_DIGIT_3_PORT, DISP_DIGIT_3_PIN, 1);
+    WRITE_PIN(DISP_DIGIT_3_PORT, DISP_DIGIT_3_PIN, 0);
 
-    set_register(26);
+    set_register(0);
 
     while(1) {
 

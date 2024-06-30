@@ -2,7 +2,8 @@
 SOURCES := main.c
 
 # Configuration
-TOOLS_DIR := "C:\Program Files (x86)\Arduino\hardware\tools\avr\bin"
+TOOLS_DIR := /home/jyaklin/arduino-1.8.19/hardware/tools/avr/bin
+AVRDUDE_CONF := ${TOOLS_DIR}/../etc/avrdude.conf
 CC := ${TOOLS_DIR}/avr-gcc
 OBJCOPY := ${TOOLS_DIR}/avr-objcopy
 OBJDUMP := ${TOOLS_DIR}/avr-objdump
@@ -25,7 +26,7 @@ EFUSE := $(word 3,${FUSE_BYTES})
 
 # Programmer options
 PROG_NAME := avrisp
-AVR_PORT ?= COM6
+AVR_PORT ?= /dev/ttyACM0
 
 CFLAGS := -O2 -Wall -Wextra -ffunction-sections -mmcu=${MCU_NAME} -DF_CPU=${F_CPU}
 LDFLAGS := -Wl,--gc-sections -mmcu=${MCU_NAME}
@@ -44,7 +45,7 @@ all: ${OUT_FILE} usage
 .PHONY: all
 
 upload: ${OUT_FILE}
-	${AVRDUDE} -p ${MCU_ABBREV} -c ${PROG_NAME} -C ${TOOLS_DIR}/../etc/avrdude.conf -P ${AVR_PORT} \
+	${AVRDUDE} -p ${MCU_ABBREV} -c ${PROG_NAME} -C ${AVRDUDE_CONF} -P ${AVR_PORT} \
 		-U lfuse:w:0x${LFUSE}:m -U hfuse:w:0x${HFUSE}:m -U efuse:w:0x${EFUSE}:m \
 		-U flash:w:${OUT_FILE}:i
 .PHONY: upload

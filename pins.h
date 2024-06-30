@@ -26,5 +26,5 @@
 
 #define WRITE_PIN(port, pin, state) do { \
     if (state) PORTx(port) |= (pin); \
-    else PORTx(port) &= -(pin); \
+    else PORTx(port) &= ~(pin); \
     } while (0)
