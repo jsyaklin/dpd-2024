@@ -1,5 +1,5 @@
 # Project source files
-SOURCES := main.c
+SOURCES := main.c i2c.c
 
 # Configuration
 TOOLS_DIR := /home/jyaklin/arduino-1.8.19/hardware/tools/avr/bin
