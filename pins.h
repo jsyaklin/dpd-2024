@@ -42,8 +42,24 @@
 #define BRUSHLESS_1_PORT PORTB
 #define BRUSHLESS_1_PIN (1<<6)
 
+//motor control inputs (from receiver)
+#define CTRL_1_A_PORT PORTD //brushed 1, PCINT16
+#define CTRL_1_A_PIN (1<<0)
+
+#define CTRL_1_B_PORT PORTD //PCINT17
+#define CTRL_1_B_PIN (1<<1)
+
+#define CTRL_2_A_PORT PORTD //brushed 2, PCINT18
+#define CTRL_2_A_PIN (1<<2)
+
+#define CTRL_2_B_PORT PORTD //PCINT19
+#define CTRL_2_B_PIN (1<<3)
+
+#define CTRL_3_PORT PORTE //brushless 1, PCINT24
+#define CTRL_3_PIN (1<<0)
+
 //sd card pins
-#define SD_MISO_PORT PORTC //master in slave out
+#define SD_MISO_PORT PORTC //leader in follower out
 #define SD_MISO_PIN (1<<0)
 
 #define SD_SCK_PORT PORTC //s clock
@@ -52,7 +68,7 @@
 #define SD_SS_PORT PORTE //slave select
 #define SD_SS_PIN (1<<2)
 
-#define SD_MOSI_PORT PORTE //master out slave in
+#define SD_MOSI_PORT PORTE //follower out leader in
 #define SD_MOSI_PIN (1<<3)
 
 //battery voltage read pin
@@ -68,4 +84,4 @@
     else PORTx(port) &= ~(pin); \
     } while (0)
 
-#define READ_PIN(port, pin) (PINx(port) & (pin))
+#define READ_PIN(port, pin) (!!(PINx(port) & (pin)))
